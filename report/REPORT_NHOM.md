@@ -121,7 +121,7 @@ chunks = chunker.chunk(body)  # body là nội dung Markdown đã bỏ frontmatt
 |-----------|----------|----------------------|-----------|----------|
 | | | | | |
 | | | | | |
-| | | | | |
+| Đặng Thế Vinh | Heading/Section + RecursiveChunker; `chunk_size=1000` ký tự | Chờ benchmark | Qua kiểm tra thủ công các chunk: giữ tiêu đề cha, các bước hướng dẫn không bị tách rời và vẫn giữ ngữ cảnh. | Chưa xác định lỗi truy xuất qua benchmark. Hạn chế thiết kế: phụ thuộc cấu trúc heading; tiêu đề lặp lại chiếm dung lượng chunk, mục quá dài vẫn có thể bị chia nhỏ. |
 
 **Chiến lược nào tốt nhất cho chủ đề này? Tại sao?**
 > *Viết 2-3 câu — đây là phần được đánh giá cao nhất (khả năng suy nghĩ & giải thích):*
