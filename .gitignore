@@ -20,3 +20,21 @@ src_w_solution/
 
 # Instructor-only notes (chứa gợi ý/đáp án chấm bài, không public cho học viên)
 docs/INSTRUCTOR_GUIDE.md
+# Môi trường ảo
+.venv/
+.venv-test/
+.venv311/
+venv/
+env/
+
+# Python và kiểm thử
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Biến môi trường, API key
+.env
+.env.*
+!.env.example
