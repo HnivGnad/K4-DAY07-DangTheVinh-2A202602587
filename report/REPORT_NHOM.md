@@ -71,15 +71,15 @@ Số liệu lấy từ [BASELINE_RESULTS.md](BASELINE_RESULTS.md); các chunk đ
 | shopee_return_refund_guide_buyer | fixed_size | 12 | 985.58 | Chưa đánh giá thủ công |
 | shopee_return_refund_guide_buyer | by_sentences | 30 | 374.37 | Chưa đánh giá thủ công |
 | shopee_return_refund_guide_buyer | recursive | 16 | 704.81 | Chưa đánh giá thủ công |
-| shopee_return_refund_guide_buyer | heading | 23 | 574.30 | Có — giữ tiêu đề cha, các bước hướng dẫn và ngữ cảnh (đã kiểm tra thủ công) |
+| shopee_return_refund_guide_buyer | heading | 23 | 574.30 | Giữ tiêu đề cha; mục dài vẫn có thể bị chia, cần đọc các chunk liên tiếp |
 | shopee_faq_return_refund_seller | fixed_size | 16 | 971.69 | Chưa đánh giá thủ công |
 | shopee_faq_return_refund_seller | by_sentences | 49 | 299.41 | Chưa đánh giá thủ công |
 | shopee_faq_return_refund_seller | recursive | 17 | 870.41 | Chưa đánh giá thủ công |
-| shopee_faq_return_refund_seller | heading | 29 | 645.17 | Có — giữ tiêu đề cha, các bước hướng dẫn và ngữ cảnh (đã kiểm tra thủ công) |
+| shopee_faq_return_refund_seller | heading | 29 | 645.17 | Giữ tiêu đề cha; mục dài vẫn có thể bị chia, cần đọc các chunk liên tiếp |
 | shopee_seller_return_refund_process | fixed_size | 7 | 943.29 | Chưa đánh giá thủ công |
 | shopee_seller_return_refund_process | by_sentences | 20 | 313.25 | Chưa đánh giá thủ công |
 | shopee_seller_return_refund_process | recursive | 8 | 787.88 | Chưa đánh giá thủ công |
-| shopee_seller_return_refund_process | heading | 11 | 697.45 | Có — giữ tiêu đề cha, các bước hướng dẫn và ngữ cảnh (đã kiểm tra thủ công) |
+| shopee_seller_return_refund_process | heading | 11 | 697.45 | Giữ tiêu đề cha; mục dài vẫn có thể bị chia, cần đọc các chunk liên tiếp |
 
 ### Chiến lược của từng thành viên
 
@@ -103,7 +103,7 @@ Số liệu lấy từ [BASELINE_RESULTS.md](BASELINE_RESULTS.md); các chunk đ
 - **Loại chiến lược:** Heading/Section kết hợp RecursiveChunker (custom).
 - **Tham số:** `chunk_size=1000` ký tự, bao gồm tiêu đề trong chunk; phần thân được chia tiếp theo ngân sách ký tự còn lại.
 - **Mô tả & lý do chọn:** Chia nội dung theo tiêu đề Markdown và giữ hệ thống tiêu đề cha trong từng chunk. Với mục dài, dùng RecursiveChunker để chia tiếp và gắn lại tiêu đề vào từng mảnh. Cách này phù hợp với tài liệu chính sách có điều khoản, quy trình và các mục hỏi đáp rõ ràng.
-- **Kết quả kiểm tra thủ công:** Trên các file Heading đã kiểm tra, chunk vẫn giữ tiêu đề cha, các bước hướng dẫn không bị tách rời và ngữ cảnh được bảo toàn. Đây là nhận xét trên bộ dữ liệu và cấu hình hiện tại, chưa phải kết luận về chất lượng truy xuất.
+- **Kết quả kiểm tra thủ công:** Các chunk giữ tiêu đề cha. Kiểm tra chi tiết cho thấy mục 5.1 của hướng dẫn người mua vẫn bị chia: chunk 9 chứa bước 1–6, chunk 10 chứa bước 7–8; mục 5.2 nằm trọn trong chunk 11. Vì vậy cần phân biệt giữ tiêu đề với giữ đầy đủ quy trình trong một chunk. Đây là nhận xét trên bộ dữ liệu và cấu hình hiện tại, chưa phải kết luận về chất lượng truy xuất.
 - **Hạn chế:** Tiêu đề lặp lại chiếm một phần dung lượng chunk; mục quá dài vẫn có thể bị chia giữa các điều kiện hoặc bước. Hiệu quả phụ thuộc việc chuẩn hóa heading của tài liệu đầu vào.
 - **Mã triển khai:** [src/heading_chunking.py](../src/heading_chunking.py).
 - **Cách sử dụng (sau khi tách frontmatter):**
@@ -124,7 +124,7 @@ chunks = chunker.chunk(body)  # body là nội dung Markdown đã bỏ frontmatt
 | Đặng Thế Vinh | Heading/Section + RecursiveChunker; `chunk_size=1000` ký tự | Chờ benchmark | Qua kiểm tra thủ công các chunk: giữ tiêu đề cha, các bước hướng dẫn không bị tách rời và vẫn giữ ngữ cảnh. | Chưa xác định lỗi truy xuất qua benchmark. Hạn chế thiết kế: phụ thuộc cấu trúc heading; tiêu đề lặp lại chiếm dung lượng chunk, mục quá dài vẫn có thể bị chia nhỏ. |
 
 **Chiến lược nào tốt nhất cho chủ đề này? Tại sao?**
-> *Viết 2-3 câu — đây là phần được đánh giá cao nhất (khả năng suy nghĩ & giải thích):*Với dữ liệu chính sách Shopee hiện tại, Heading/Section kết hợp Recursive là lựa chọn phù hợp vì tận dụng cấu trúc điều khoản và mục hỏi đáp. Qua kiểm tra thủ công, các chunk giữ được tiêu đề cha, các bước hướng dẫn và ngữ cảnh. Tuy nhiên, nhóm cần so sánh kết quả trên cùng 5 câu hỏi trước khi kết luận chiến lược nào truy xuất tốt nhất.
+> *Viết 2-3 câu — đây là phần được đánh giá cao nhất (khả năng suy nghĩ & giải thích):*Với dữ liệu chính sách Shopee hiện tại, Heading/Section kết hợp Recursive là lựa chọn phù hợp vì tận dụng cấu trúc điều khoản và mục hỏi đáp. Qua kiểm tra thủ công, các chunk giữ được tiêu đề cha; một số quy trình dài vẫn trải trên nhiều chunk nên cần kiểm tra đủ ngữ cảnh khi truy xuất. Tuy nhiên, nhóm cần so sánh kết quả trên cùng 5 câu hỏi trước khi kết luận chiến lược nào truy xuất tốt nhất.
 
 ---
 
@@ -132,33 +132,41 @@ chunks = chunker.chunk(body)  # body là nội dung Markdown đã bỏ frontmatt
 
 ### Câu hỏi đánh giá & Câu trả lời chuẩn (nhóm thống nhất)
 
-> **Đúng 5 câu hỏi**, đa dạng, có thể kiểm chứng; **ít nhất 1 câu** cần lọc metadata mới trả lời tốt. Đây là bộ câu hỏi chung cho mọi thành viên chạy.
+Nhóm sử dụng đúng 5 câu hỏi dưới đây cho mọi chiến lược. Đáp án được đối chiếu với corpus; các câu thiếu nguồn chưa được chốt đáp án chuẩn. Số chunk bên dưới là chỉ số bắt đầu từ 0 trong các file `report/baseline_chunks/*__heading.txt`, ứng với cấu hình Heading 1.000 ký tự; đây là vị trí thông tin, không phải kết quả top-3. Chiến lược khác cần xác định chunk tương ứng của mình.
 
 | # | Câu hỏi (Query) | Câu trả lời chuẩn (Gold Answer) | Chunk nào chứa thông tin? |
-|---|-------|-------------------------------|--------------------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
+|---|---|---|---|
+| 1 | Người mua cần thực hiện những bước nào trên ứng dụng Shopee để gửi yêu cầu Trả hàng/Hoàn tiền? | Theo mục 5.1 của tài liệu người mua: vào Tôi, chọn đơn trong Chờ giao hàng/Đã giao; nhấn Trả hàng/Hoàn tiền; chọn tình huống, sản phẩm, lý do và phương án xử lý; cung cấp mô tả, ảnh/video bằng chứng và email; kiểm tra rồi gửi yêu cầu. Chấp nhận cách khác theo mục 5.2: Tôi → Trò Chuyện Với Shopee → Khiếu nại trả hàng hoàn tiền → chọn đơn → xác nhận trạng thái nhận hàng, chọn lý do, tải bằng chứng → gửi yêu cầu. | `shopee_return_refund_guide_buyer`: chunk 9 + 10 chứa đầy đủ cách 5.1; chunk 11 chứa cách 5.2. |
+| 2 | Khi Shopee yêu cầu bổ sung bằng chứng cho yêu cầu Trả hàng/Hoàn tiền, Người mua có bao nhiêu thời gian để phản hồi? | **Chưa chốt — thiếu nguồn xác minh.** Không dùng con số 24 giờ trong bản nháp làm gold answer. Cần tài liệu nêu thời hạn, mốc bắt đầu và điều kiện áp dụng. | Chưa xác định được chunk có nguồn đủ căn cứ trong corpus. |
+| 3 | Những nhóm sản phẩm nào thuộc danh mục hạn chế không được trả hàng hoặc không áp dụng lý do "Đổi ý/không còn nhu cầu"? | **Đáp án dự kiến theo bản thu thập quy trình người bán, cần đối chiếu nguồn:** Thiết bị Điện tử & Công nghệ; Sức khỏe, Vệ sinh & Đồ cá nhân; Thực phẩm & Hàng mau hỏng; Hàng đặc thù trong vận chuyển; Sản phẩm số và dịch vụ; nhóm khác theo thông báo từng thời điểm. Danh sách này nằm trong điều kiện không áp dụng lý do Đổi ý, không có nghĩa mọi trường hợp đều bị cấm trả hàng. Hai tài liệu người mua/người bán liệt kê khác nhau nên nhóm cần thống nhất phạm vi và phiên bản trước khi chấm. | `shopee_seller_return_refund_process`: chunk 3 chứa điều kiện, chunk 4 chứa 5 nhóm chính, chunk 5 chứa nhóm khác. |
+| 4 | Shopee Xu và Mã giảm giá (Voucher) đã sử dụng sẽ được hoàn lại như thế nào khi yêu cầu Trả hàng/Hoàn tiền thành công? | **Chưa chốt — thiếu nguồn xác minh.** Cần xác định riêng quy định hoàn Xu và Voucher, thời điểm, điều kiện và ngoại lệ. Không dùng kết luận tự động hoàn lại từ bản nháp làm gold answer. | Chưa xác định được chunk có nguồn đủ căn cứ trong corpus. |
+| 5 | Người bán vi phạm quy định đăng bán sản phẩm trên Shopee (như bán hàng cấm, hàng giả, gian lận) sẽ bị xử lý bằng những hình thức nào? | **Chưa chốt — cần bổ sung tài liệu về xử lý vi phạm đăng bán.** Không suy đoán hình thức xử phạt và không dùng chế tài dành cho người mua trục lợi để trả lời. Chạy với `metadata_filter={"audience": "seller"}`. | Corpus hiện chưa có tài liệu đủ để xác lập đáp án. |
 
 ### Tổng hợp chất lượng truy xuất của nhóm
 
-> Cách chấm (theo `docs/SCORING.md`): **2 điểm/câu** — top-3 chứa chunk liên quan + agent trả lời đúng (2), có liên quan nhưng thiếu/không ở top-1 (1), không có trong top-3 (0).
+**Kết quả thực nghiệm của Đặng Thế Vinh:** Heading/Section kết hợp Recursive, `chunk_size=1000`, backend `gemini-embedding-001`, 6 tài liệu và 96 chunk, top-k=3. Nguồn kết quả: [ket_qua_benchmark.txt](../ket_qua_benchmark.txt). Đã chạy retrieval trên đủ 5 câu, câu 5 có thêm lượt lọc seller. Chưa sinh câu trả lời LLM, chưa có kết quả các thành viên khác nên chưa chấm điểm tổng hoặc xác định chiến lược tốt nhất.
 
-| # | Câu hỏi | Chiến lược tốt nhất cho câu này | Có chunk liên quan trong top-3? | Ghi chú |
-|---|---------|-------------------------------|-------------------------------|---------|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+Quy ước tên ngắn trong bảng: **buyer** = `shopee_return_refund_guide_buyer`; **process** = `shopee_seller_return_refund_process`; **faq** = `shopee_faq_return_refund_seller`; **payment** = `shopee_payment_policy_seller`. Số sau dấu # là chỉ số chunk, không phải thứ hạng.
+
+| # | Câu hỏi | Chiến lược tốt nhất | Top-3 của Heading (chunk; score) | Đánh giá nội dung |
+|---|---|---|---|---|
+| 1 | Các bước gửi yêu cầu | Chưa so sánh | buyer#1 (0.8792); buyer#8 (0.8765); buyer#9 (0.8703) | Có thông tin một phần ở top-3: chunk 9 chứa bước 1–6, thiếu bước 7–8 ở chunk 10. Hai chunk đầu chỉ nêu quy định/giới thiệu, không đủ hướng dẫn hoàn chỉnh. |
+| 2 | Thời hạn bổ sung bằng chứng | Chưa so sánh | buyer#3 (0.8194); process#1 (0.8170); buyer#2 (0.8083) | Không chứa đáp án cần hỏi: các đoạn nói về thời hạn gửi yêu cầu hoặc xử lý, không phải thời hạn bổ sung bằng chứng. Con số 24 giờ trong top-3 áp dụng cho yêu cầu về thực phẩm, không được dùng làm đáp án câu này. Corpus thiếu nguồn xác minh. |
+| 3 | Nhóm sản phẩm hạn chế | Chưa so sánh | faq#16 (0.8910); buyer#5 (0.8596); buyer#6 (0.8489) | Có danh sách một phần ở top-3. Top-1 chỉ dẫn sang bài khác; top-2 giải thích khái niệm; top-3 chứa phần đầu bảng, thiếu phần tiếp theo ở buyer#7. Vẫn cần thống nhất phạm vi/phiên bản đáp án chuẩn. |
+| 4 | Hoàn Xu và Voucher | Chưa so sánh | buyer#20 (0.7741); buyer#1 (0.7669); buyer#0 (0.7569) | Không chứa quy định hoàn Xu/Voucher. Các đoạn chỉ nói về điều kiện yêu cầu hoặc giới thiệu chung; corpus thiếu nguồn. |
+| 5 | Xử lý người bán vi phạm | Chưa so sánh | faq#18 (0.7750); faq#20 (0.7495); payment#3 (0.7184), giống nhau ở cả hai lượt | Không trả lời được câu hỏi: top-1/top-2 nói về người mua trục lợi, top-3 nói về thanh toán. Chưa có nguồn xử lý vi phạm đăng bán của người bán. |
 
 **Lọc bằng metadata có giúp ích không? Ở câu hỏi nào?**
-> *Viết 2-3 câu:*
+
+Ở câu 5, có và không có `metadata_filter={"audience": "seller"}` cho cùng ba chunk, cùng thứ hạng và điểm số; lượt thử này chưa cho thấy cải thiện. Nguyên nhân quan sát được là cả ba kết quả ban đầu đã thuộc tài liệu gắn `audience=seller`, nhưng các chunk FAQ lại bàn về hành vi của người mua: đối tượng đọc tài liệu khác với đối tượng được đề cập trong nội dung. Cần bổ sung nguồn đúng cho câu 5, cân nhắc metadata cấp chunk như `subject_role`/`topic`, và thiết kế lại thử nghiệm để chứng minh ít nhất một câu thực sự cần lọc; không đổi nhãn audience chỉ để làm kết quả đẹp hơn.
+
+**Phân tích lỗi thực tế:** Câu 1 lấy đúng tài liệu nhưng thiếu bước cuối vì mục 5.1 bị chia thành chunk 9 và 10, trong khi hai đoạn giới thiệu chiếm top-1/top-2. Hướng cải thiện cần thử là giữ nguyên toàn bộ mục hướng dẫn khi phù hợp, lấy thêm chunk liền kề hoặc xếp hạng lại để ưu tiên đoạn chứa bước thao tác. Câu 3 cũng cho thấy chunk có tiêu đề gần giống câu hỏi có thể xếp cao dù chỉ chứa lời dẫn sang tài liệu khác. Đây là đề xuất thử nghiệm, chưa phải cải thiện đã được đo.
+
+**Giới hạn đánh giá:** Có thông tin trả lời một phần ở câu 1 và 3; top-3 chưa đủ trả lời trọn vẹn cả 5 câu. Không quy toàn bộ lỗi cho Heading vì câu 2, 4, 5 thiếu dữ liệu nguồn. Chưa đánh giá chất lượng câu trả lời agent hoặc chấm điểm theo rubric khi chưa có câu trả lời và gold answer đầy đủ.
+
+**Lưu ý khi nạp dữ liệu:** Chỉ nạp tài liệu được liệt kê trong `sources.csv`. `SHOPEE_DATA_REVIEW.md` là ghi chú rà soát, không phải nguồn chính sách và không được nạp vào benchmark.
 
 ---
-
 ## 4. Thuyết trình (Demo) & Bài học nhóm — Nhóm (5 điểm)
 
 **Những phân tích (insights) hay nhất nhóm sẽ trình bày:**

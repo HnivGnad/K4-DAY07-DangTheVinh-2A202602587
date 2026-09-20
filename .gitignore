@@ -19,6 +19,7 @@ htmlcov/
 !.env.example
 
 # Local model caches
+.embedding-cache/
 .hf-cache/
 .sentence-transformers/
 

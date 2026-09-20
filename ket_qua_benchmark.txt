@@ -1,0 +1,196 @@
+Strategy: heading; chunk_size: 1000; fixed overlap: 50; sentence limit: 3
+Backend: gemini-embedding-001
+Documents: 6; chunks: 96
+Retrieval only: chưa sinh câu trả lời LLM, chưa chấm điểm.
+Câu 2, 4, 5 còn thiếu nguồn; câu 3 cần đối chiếu phạm vi/phiên bản.
+
+Câu 1: Người mua cần thực hiện những bước nào trên ứng dụng Shopee để gửi yêu cầu Trả hàng/Hoàn tiền?
+Filter: None
+Top 1 | score=0.8792 | shopee_return_refund_guide_buyer#1
+audience=buyer | source=https://shopee.vn/blog/cach-tra-hang-hoan-tien-tren-shopee/
+# Hướng dẫn chi tiết cách trả hàng hoàn tiền trên Shopee
+## 1. Quy định chung về chính sách Trả hàng/Hoàn tiền của Shopee
+
+Hiện tại, Shopee chưa triển khai tính năng đổi sản phẩm trực tiếp. Trong trường hợp sản phẩm bạn nhận được gặp vấn đề như không đúng mô tả, bị lỗi hoặc hư hỏng, bạn có thể xử lý theo hai cách tùy tình huống:
+*   **Nếu đơn hàng có hỗ trợ đồng kiểm:** Bạn có thể kiểm tra hàng ngay khi nhận và từ chối nhận hàng nếu phát hiện sản phẩm không đúng như cam kết.
+*   **Nếu bạn đã nhận hàng:** Có thể gửi yêu cầu Trả hàng/Hoàn tiền trực tiếp trên ứng dụng Shopee để được xem xét xử lý.
+Top 2 | score=0.8765 | shopee_return_refund_guide_buyer#8
+audience=buyer | source=https://shopee.vn/blog/cach-tra-hang-hoan-tien-tren-shopee/
+# Hướng dẫn chi tiết cách trả hàng hoàn tiền trên Shopee
+## 5. Hướng dẫn cách trả hàng hoàn tiền trên Shopee
+
+Khi cần thực hiện cách trả hàng hoàn tiền trên Shopee, bạn có thể gửi yêu cầu trực tiếp trên ứng dụng theo các bước đơn giản dưới đây.
+Top 3 | score=0.8703 | shopee_return_refund_guide_buyer#9
+audience=buyer | source=https://shopee.vn/blog/cach-tra-hang-hoan-tien-tren-shopee/
+# Hướng dẫn chi tiết cách trả hàng hoàn tiền trên Shopee
+## 5. Hướng dẫn cách trả hàng hoàn tiền trên Shopee
+### 5.1 Gửi yêu cầu trực tiếp tại trang đơn hàng
+
+Đây là cách phổ biến và được nhiều người sử dụng nhất khi muốn hoàn trả hoặc khiếu nại đơn hàng.
+*   **Bước 1:** Mở ứng dụng Shopee, vào mục **Tôi**, sau đó chọn đơn hàng trong tab **Chờ giao hàng** hoặc **Đã giao**.
+*   **Bước 2:** Tại đơn hàng cần xử lý, nhấn vào nút **Trả hàng/Hoàn tiền**.
+*   **Bước 3:** Chọn tình huống phù hợp với vấn đề bạn đang gặp như hàng bể vỡ, sai mẫu, lỗi, khác mô tả hay chưa nhận được hàng.
+*   **Bước 4:** Chọn sản phẩm cần khiếu nại (đối với đơn hàng có nhiều sản phẩm).
+*   **Bước 5:** Lựa chọn lý do khiếu nại phù hợp với tình trạng thực tế của đơn hàng.
+*   **Bước 6:** Chọn phương án xử lý (trả hàng hoặc hoàn tiền), đặc biệt trong trường hợp khiếu trực tiếp thiếu hàng.
+
+
+Câu 2: Khi Shopee yêu cầu bổ sung bằng chứng cho yêu cầu Trả hàng/Hoàn tiền, Người mua có bao nhiêu thời gian để phản hồi?
+Filter: None
+Top 1 | score=0.8194 | shopee_return_refund_guide_buyer#3
+audience=buyer | source=https://shopee.vn/blog/cach-tra-hang-hoan-tien-tren-shopee/
+# Hướng dẫn chi tiết cách trả hàng hoàn tiền trên Shopee
+## 2. Thời gian tối đa để gửi yêu cầu trả hàng hoàn tiền cho Shopee
+
+> ⚠️ **Lưu ý:** Ngoài ra, khi bạn đã chọn “Đã nhận được hàng” thì vẫn có thể gửi yêu cầu Trả hàng/Hoàn tiền trong vòng 15 ngày. Sau khi gửi yêu cầu, hệ thống thường sẽ phản hồi trong khoảng 3–5 ngày làm việc. Với những sản phẩm thuộc danh mục hạn chế trả hàng, Shopee sẽ xem xét từng trường hợp cụ thể trước khi đưa ra quyết định cuối cùng.
+Top 2 | score=0.8170 | shopee_seller_return_refund_process#1
+audience=seller | source=https://banhang.shopee.vn/edu/article/563
+# Quy trình Trả hàng/Hoàn tiền trên Shopee dành cho Người bán
+## A. TỔNG QUAN QUY TRÌNH TRẢ HÀNG/HOÀN TIỀN
+### 1. Thời hạn Người mua yêu cầu Trả hàng/Hoàn tiền
+
+Người mua có thể nhấn yêu cầu Trả hàng/Hoàn tiền trong vòng 15 ngày kể từ khi đơn giao thành công. Trong trường hợp Người mua đã bấm xác nhận "Đã nhận được hàng", Người mua vẫn có thể gửi yêu cầu nếu vẫn còn trong thời hạn Trả hàng/Hoàn tiền.
+
+Lưu ý:
+
+Nếu sau thời hạn nhấn Trả hàng/Hoàn tiền, Người mua phát sinh yêu cầu Trả hàng/Hoàn tiền với sản phẩm nhận được và liên hệ trực tiếp đến bộ phận Chăm sóc khách hàng của Shopee, Shopee sẽ xem xét hỗ trợ nếu yêu cầu được chấp nhận theo chính sách hiện tại. Do đó, Người bán nên thường xuyên kiểm tra và theo dõi mục "Trả hàng/Hoàn tiền" để xử lý và cung cấp bằng chứng theo quy định để đảm bảo quyền lợi.
+Top 3 | score=0.8083 | shopee_return_refund_guide_buyer#2
+audience=buyer | source=https://shopee.vn/blog/cach-tra-hang-hoan-tien-tren-shopee/
+# Hướng dẫn chi tiết cách trả hàng hoàn tiền trên Shopee
+## 2. Thời gian tối đa để gửi yêu cầu trả hàng hoàn tiền cho Shopee
+
+Shopee quy định thời hạn cụ thể để người mua gửi yêu cầu Trả hàng/Hoàn tiền. Thời gian để Shopee tiếp nhận yêu cầu Trả hàng/Hoàn tiền từ người mua sẽ là:
+*   **Đối với đơn hàng giao thực phẩm tươi sống & đông lạnh** (trừ lý do Chưa nhận được hàng): Trong vòng **24 giờ** kể từ lúc đơn hàng được cập nhật trạng thái ‘Giao hàng thành công’.
+*   **Đối với đơn hàng do Người bán tự vận chuyển:** Trong vòng **15 ngày** kể từ khi bạn nhấn nút “Đã nhận được hàng”. Hoặc 20 ngày kể từ khi đơn hàng được cập nhật trạng thái “Lấy hàng thành công”, trong trường hợp bạn chưa xác nhận đã nhận hàng.
+*   **Đối với các đơn hàng khác:** **15 ngày** kể từ lúc đơn hàng được cập nhật trạng thái “Giao hàng thành công”.
+
+
+
+Câu 3: Những nhóm sản phẩm nào thuộc danh mục hạn chế không được trả hàng hoặc không áp dụng lý do "Đổi ý/không còn nhu cầu"?
+Filter: None
+Top 1 | score=0.8910 | shopee_faq_return_refund_seller#16
+audience=seller | source=https://banhang.shopee.vn/edu/article/10626
+# [Cập nhật] Các câu hỏi thường gặp về Trả hàng/Hoàn tiền trên Shopee dành cho Người bán
+## D. Các câu hỏi về chính sách hỗ trợ Người mua trả hàng khi đổi ý (không còn nhu cầu)
+### 3. Những sản phẩm nào sẽ không cho phép Người mua được trả hàng với lý do đổi ý?
+
+Shop có thể tham khảo danh sách sản phẩm hạn chế trả hàng tại bài viết Quy trình Trả hàng và hoàn tiền Shopee dành cho Người bán.
+Top 2 | score=0.8596 | shopee_return_refund_guide_buyer#5
+audience=buyer | source=https://shopee.vn/blog/cach-tra-hang-hoan-tien-tren-shopee/
+# Hướng dẫn chi tiết cách trả hàng hoàn tiền trên Shopee
+## 4. Những sản phẩm hạn chế trả hàng
+
+Sản phẩm hạn chế trả hàng là những mặt hàng có đặc tính riêng biệt, dễ bị ảnh hưởng bởi môi trường bên ngoài hoặc yêu cầu điều kiện bảo quản đặc biệt. Do tính chất nhạy cảm và khó kiểm soát chất lượng sau khi mở hoặc sử dụng, việc hoàn trả các sản phẩm này thường được áp dụng những quy định nghiêm ngặt hơn so với các loại hàng hóa thông thường.
+
+Đối với nhóm sản phẩm thuộc danh mục hạn chế trả hàng, Shopee không chấp nhận lý do trả hàng với trường hợp “Hàng nguyên vẹn nhưng không còn nhu cầu sử dụng”. Điều này có nghĩa là nếu sản phẩm vẫn còn nguyên vẹn và đúng với mô tả ban đầu, bạn sẽ không thể gửi yêu cầu hoàn trả chỉ vì thay đổi ý định mua hàng.
+
+
+Top 3 | score=0.8489 | shopee_return_refund_guide_buyer#6
+audience=buyer | source=https://shopee.vn/blog/cach-tra-hang-hoan-tien-tren-shopee/
+# Hướng dẫn chi tiết cách trả hàng hoàn tiền trên Shopee
+## 4. Những sản phẩm hạn chế trả hàng
+
+| Danh mục | Sản phẩm hạn chế trả hàng |
+| :--- | :--- |
+| **Nhà cửa & đời sống** | Cây cảnh (cây, hoa,…) |
+| **Thực phẩm và đồ uống** | Các sản phẩm thuộc Sữa – trứng (Bột kem béo, Bơ động vật & thực vật, Phô mai & bột phô mai, Kem, Trứng, Đậu phụ).<br>Thực phẩm tươi sống & đông lạnh.<br>Đồ ăn chế biến sẵn.<br>Các loại bánh (bao gồm Bánh mì, Bánh kem, Bánh ngọt/ pastry và các loại bánh khác theo đánh giá của Shopee tại từng thời điểm). |
+| **Sức khỏe** | Găng tay & khẩu trang y tế |
+| **Voucher và Dịch vụ** | Tất cả các loại sản phẩm trong danh mục này |
+| **Thể thao & Dã ngoại** | Áo Lót Thể Thao.<br>Đồ Bơi: không hỗ trợ khi đã mặc thử. |
+| **Thời trang nam/nữ** | Đồ lót: Quần/áo lót, Đồ lót giữ nhiệt, Phụ kiện đồ lót, Đồ định hình, Đồ lót bảo hộ, Áo liền thân,…: không hỗ trợ khi đã mặc thử.<br>Vớ/Tất: Quần tất.<br>Đồ Bầu: áo ngực cho con bú, đồ mặc cho con bú. |
+
+
+Câu 4: Shopee Xu và Mã giảm giá (Voucher) đã sử dụng sẽ được hoàn lại như thế nào khi yêu cầu Trả hàng/Hoàn tiền thành công?
+Filter: None
+Top 1 | score=0.7741 | shopee_return_refund_guide_buyer#20
+audience=buyer | source=https://shopee.vn/blog/cach-tra-hang-hoan-tien-tren-shopee/
+# Hướng dẫn chi tiết cách trả hàng hoàn tiền trên Shopee
+## FAQs: Câu hỏi thường gặp
+### Tôi đã nhấn “Đã nhận được hàng”, tôi có yêu cầu trả hàng/hoàn tiền được không?
+
+Bạn vẫn có thể gửi yêu cầu Trả hàng/Hoàn tiền ngay cả khi đã bấm xác nhận “Đã nhận được hàng”, miễn là yêu cầu được thực hiện trong thời hạn 15 ngày kể từ thời điểm hoàn tất đơn hàng theo quy định của Shopee.
+Top 2 | score=0.7669 | shopee_return_refund_guide_buyer#1
+audience=buyer | source=https://shopee.vn/blog/cach-tra-hang-hoan-tien-tren-shopee/
+# Hướng dẫn chi tiết cách trả hàng hoàn tiền trên Shopee
+## 1. Quy định chung về chính sách Trả hàng/Hoàn tiền của Shopee
+
+Hiện tại, Shopee chưa triển khai tính năng đổi sản phẩm trực tiếp. Trong trường hợp sản phẩm bạn nhận được gặp vấn đề như không đúng mô tả, bị lỗi hoặc hư hỏng, bạn có thể xử lý theo hai cách tùy tình huống:
+*   **Nếu đơn hàng có hỗ trợ đồng kiểm:** Bạn có thể kiểm tra hàng ngay khi nhận và từ chối nhận hàng nếu phát hiện sản phẩm không đúng như cam kết.
+*   **Nếu bạn đã nhận hàng:** Có thể gửi yêu cầu Trả hàng/Hoàn tiền trực tiếp trên ứng dụng Shopee để được xem xét xử lý.
+Top 3 | score=0.7569 | shopee_return_refund_guide_buyer#0
+audience=buyer | source=https://shopee.vn/blog/cach-tra-hang-hoan-tien-tren-shopee/
+# Hướng dẫn chi tiết cách trả hàng hoàn tiền trên Shopee
+
+**Ngày cập nhật:** 15/09/2026
+
+Bạn gặp vấn đề với đơn hàng và muốn biết cách trả hàng hoàn tiền trên Shopee nhanh chóng, đúng quy trình? Trong bài viết này, Shopee Blog sẽ hướng dẫn chi tiết từng bước giúp bạn xử lý yêu cầu trả hàng, hoàn tiền dễ dàng, tránh mất quyền lợi và tiết kiệm thời gian!
+
+Câu 5: Người bán vi phạm quy định đăng bán sản phẩm trên Shopee (như bán hàng cấm, hàng giả, gian lận) sẽ bị xử lý bằng những hình thức nào?
+Filter: None
+Top 1 | score=0.7750 | shopee_faq_return_refund_seller#18
+audience=seller | source=https://banhang.shopee.vn/edu/article/10626
+# [Cập nhật] Các câu hỏi thường gặp về Trả hàng/Hoàn tiền trên Shopee dành cho Người bán
+## E. Các câu hỏi khác
+### 2. Với những Người mua trục lợi đơn hàng, Shopee có chế tài xử lý nào hay không? Mức độ xử phạt với những tài khoản Người mua vi phạm là gì?
+
+Shopee nghiêm cấm các hành vi lợi dụng chương trình. Tùy vào các trường hợp cụ thể Shopee có các biện pháp xử lý thích hợp, bao gồm nhưng không giới hạn việc khóa tài khoản, hạn chế trả hàng mà không báo trước, đưa vụ việc ra cơ quan nhà nước có thẩm quyền theo quy định của pháp luật.
+
+Người mua sẽ được thêm vào Danh sách theo dõi của Shopee và không được hưởng các chính sách của quy trình Trả hàng/Hoàn tiền mới.
+
+Bên cạnh đó, tất cả các khiếu nại của Người mua này sẽ được Shopee xem xét kỹ lưỡng để đưa ra quyết định. Shopee sẽ có những chính sách điều chỉnh & giới hạn quyền lợi khi giao dịch tại sàn đối với Người mua có dấu hiệu trục lợi đơn hàng.
+
+Shop hãy yên tâm khi bán hàng tại Shopee nhé!
+Top 2 | score=0.7495 | shopee_faq_return_refund_seller#20
+audience=seller | source=https://banhang.shopee.vn/edu/article/10626
+# [Cập nhật] Các câu hỏi thường gặp về Trả hàng/Hoàn tiền trên Shopee dành cho Người bán
+## E. Các câu hỏi khác
+### 4. Tôi lo lắng đối với các trường hợp Người mua trả hàng/hoặc cố tình trả hàng không đúng với sản phẩm của Shop, tôi phải làm gì?
+
+Nếu Người mua hoàn trả hàng lại không đúng với sản phẩm của Shop, Shop vui lòng gửi khiếu nại để Shopee có thể hỗ trợ và xử lý. (Xem hướng dẫn TẠI ĐÂY).
+
+Shop hãy yên tâm vì Người mua có yếu tố gian lận và bị Shopee phát hiện sẽ được đưa vào danh sách theo dõi và không được hưởng các quyền lợi của chính sách Trả hàng/Hoàn tiền về sau.
+Top 3 | score=0.7184 | shopee_payment_policy_seller#3
+audience=seller | source=https://banhang.shopee.vn/edu/article/234
+# [Cập Nhật] Quy Trình Shopee Thanh Toán Cho Người Bán
+## 2. Thời hạn Shopee Thanh toán đơn hàng Cho Người Bán
+
+> ⚠️ **Lưu ý:**
+>
+> - Đối với một số đơn/Người dùng nghi ngờ có dấu hiệu gian lận, Shopee sẽ cần thời gian để xem xét thêm. Do đó, thời hạn thanh toán có thể lên tới 15 ngày kể từ khi đơn hàng được giao thành công.
+> - Người mua có thể gửi yêu cầu Trả hàng/Hoàn tiền sau khi đơn hàng hoàn thành, khi đó Shopee có thể cấn trừ Số dư TK Shopee của Người bán để hoàn tiền cho Người mua nếu yêu cầu Trả hàng/Hoàn tiền được chấp nhận.
+> - Trong trường hợp Hoàn tiền, tiền sẽ được chuyển vào tài khoản của Người mua. Số tiền còn lại (nếu có) sẽ được thanh toán cho Người bán qua Số dư TK Shopee.
+
+Câu 5: Người bán vi phạm quy định đăng bán sản phẩm trên Shopee (như bán hàng cấm, hàng giả, gian lận) sẽ bị xử lý bằng những hình thức nào?
+Filter: {'audience': 'seller'}
+Top 1 | score=0.7750 | shopee_faq_return_refund_seller#18
+audience=seller | source=https://banhang.shopee.vn/edu/article/10626
+# [Cập nhật] Các câu hỏi thường gặp về Trả hàng/Hoàn tiền trên Shopee dành cho Người bán
+## E. Các câu hỏi khác
+### 2. Với những Người mua trục lợi đơn hàng, Shopee có chế tài xử lý nào hay không? Mức độ xử phạt với những tài khoản Người mua vi phạm là gì?
+
+Shopee nghiêm cấm các hành vi lợi dụng chương trình. Tùy vào các trường hợp cụ thể Shopee có các biện pháp xử lý thích hợp, bao gồm nhưng không giới hạn việc khóa tài khoản, hạn chế trả hàng mà không báo trước, đưa vụ việc ra cơ quan nhà nước có thẩm quyền theo quy định của pháp luật.
+
+Người mua sẽ được thêm vào Danh sách theo dõi của Shopee và không được hưởng các chính sách của quy trình Trả hàng/Hoàn tiền mới.
+
+Bên cạnh đó, tất cả các khiếu nại của Người mua này sẽ được Shopee xem xét kỹ lưỡng để đưa ra quyết định. Shopee sẽ có những chính sách điều chỉnh & giới hạn quyền lợi khi giao dịch tại sàn đối với Người mua có dấu hiệu trục lợi đơn hàng.
+
+Shop hãy yên tâm khi bán hàng tại Shopee nhé!
+Top 2 | score=0.7495 | shopee_faq_return_refund_seller#20
+audience=seller | source=https://banhang.shopee.vn/edu/article/10626
+# [Cập nhật] Các câu hỏi thường gặp về Trả hàng/Hoàn tiền trên Shopee dành cho Người bán
+## E. Các câu hỏi khác
+### 4. Tôi lo lắng đối với các trường hợp Người mua trả hàng/hoặc cố tình trả hàng không đúng với sản phẩm của Shop, tôi phải làm gì?
+
+Nếu Người mua hoàn trả hàng lại không đúng với sản phẩm của Shop, Shop vui lòng gửi khiếu nại để Shopee có thể hỗ trợ và xử lý. (Xem hướng dẫn TẠI ĐÂY).
+
+Shop hãy yên tâm vì Người mua có yếu tố gian lận và bị Shopee phát hiện sẽ được đưa vào danh sách theo dõi và không được hưởng các quyền lợi của chính sách Trả hàng/Hoàn tiền về sau.
+Top 3 | score=0.7184 | shopee_payment_policy_seller#3
+audience=seller | source=https://banhang.shopee.vn/edu/article/234
+# [Cập Nhật] Quy Trình Shopee Thanh Toán Cho Người Bán
+## 2. Thời hạn Shopee Thanh toán đơn hàng Cho Người Bán
+
+> ⚠️ **Lưu ý:**
+>
+> - Đối với một số đơn/Người dùng nghi ngờ có dấu hiệu gian lận, Shopee sẽ cần thời gian để xem xét thêm. Do đó, thời hạn thanh toán có thể lên tới 15 ngày kể từ khi đơn hàng được giao thành công.
+> - Người mua có thể gửi yêu cầu Trả hàng/Hoàn tiền sau khi đơn hàng hoàn thành, khi đó Shopee có thể cấn trừ Số dư TK Shopee của Người bán để hoàn tiền cho Người mua nếu yêu cầu Trả hàng/Hoàn tiền được chấp nhận.
+> - Trong trường hợp Hoàn tiền, tiền sẽ được chuyển vào tài khoản của Người mua. Số tiền còn lại (nếu có) sẽ được thanh toán cho Người bán qua Số dư TK Shopee.
