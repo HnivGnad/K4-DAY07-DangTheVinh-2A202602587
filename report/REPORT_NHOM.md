@@ -170,13 +170,18 @@ Quy ước tên ngắn trong bảng: **buyer** = `shopee_return_refund_guide_buy
 ## 4. Thuyết trình (Demo) & Bài học nhóm — Nhóm (5 điểm)
 
 **Những phân tích (insights) hay nhất nhóm sẽ trình bày:**
-> *Liệt kê 2-3 ý:*
+
+- **Điểm tương đồng cao không đồng nghĩa có đủ đáp án.** Ở câu 1, top-1 đạt 0.8792 nhưng chỉ chứa quy định chung; đoạn hướng dẫn đứng top-3 và thiếu bước 7–8. Ở câu 3, top-1 đạt 0.8910 nhưng chỉ dẫn sang bài khác, cho thấy cần kiểm tra nội dung trả lời được thay vì chỉ nhìn điểm hoặc tên tài liệu.
+- **Giữ tiêu đề chưa đủ để giữ trọn quy trình.** HeadingChunker giữ tiêu đề cha nhưng ngưỡng 1.000 ký tự vẫn chia mục 5.1 thành chunk 9 và 10; chỉ chunk 9 được truy xuất. Đây là trường hợp lỗi cụ thể để thử giữ nguyên mục hướng dẫn hoặc lấy thêm chunk liền kề.
+- **Metadata phải phân biệt người đọc với đối tượng được nói đến.** Câu 5 có/không filter `audience=seller` trả về cùng top-3, vì tài liệu dành cho người bán vẫn có đoạn nói về người mua trục lợi. Filter không bổ sung được thông tin còn thiếu trong corpus; câu 2, 4, 5 cần nguồn phù hợp trước khi đánh giá đầy đủ.
 
 **Bài học rút ra khi so sánh trong nhóm:**
-> *Viết 2-3 câu — cùng tài liệu nhưng chiến lược khác nhau dẫn tới khác biệt gì?*
+
+Trên cùng tài liệu hướng dẫn người mua, baseline tạo 12 chunk FixedSize, 30 chunk Sentence, 16 chunk Recursive và 23 chunk Heading, cho thấy cách chia làm thay đổi số lượng và phạm vi nội dung của mỗi đơn vị truy xuất. Kết quả Heading cho thấy giữ cấu trúc tiêu đề giúp nhận diện ngữ cảnh nhưng chưa bảo đảm lấy đủ các bước hoặc danh sách khi một mục trải trên nhiều chunk. Nhóm hiện mới có benchmark retrieval của Heading, nên chưa kết luận chiến lược nào tốt nhất; cần so sánh các thành viên trên cùng corpus, câu hỏi, backend embedding và top-k.
 
 **Nếu làm lại, nhóm sẽ thay đổi gì trong chiến lược dữ liệu (data strategy)?**
-> *Viết 2-3 câu:*
+
+Nhóm sẽ lập bảng đối chiếu từng câu hỏi với đoạn nguồn và đáp án chuẩn trước khi chạy benchmark, ưu tiên bổ sung nguồn cho câu 2, 4, 5 và thống nhất phạm vi/phiên bản của danh mục hạn chế ở câu 3. Nhóm sẽ chuẩn hóa heading, giữ đủ điều kiện và ngoại lệ, đồng thời bổ sung metadata cấp chunk về chủ đề hoặc đối tượng được đề cập khi cần phân biệt với `audience` của tài liệu. Sau đó, nhóm sẽ thử giữ trọn mục hướng dẫn hoặc mở rộng sang chunk liền kề và đo lại trên cùng bộ câu hỏi để kiểm chứng hiệu quả.
 
 ---
 
