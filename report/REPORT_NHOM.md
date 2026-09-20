@@ -85,18 +85,14 @@ Số liệu lấy từ [BASELINE_RESULTS.md](BASELINE_RESULTS.md); các chunk đ
 
 > Mỗi thành viên điền một khối dưới đây (copy thêm nếu nhóm có nhiều hơn 3 người).
 
-**Thành viên 1 — [Tên]**
-- **Loại chiến lược:** [FixedSize / Sentence / Recursive / custom]
-- **Mô tả & lý do chọn cho chủ đề này:** *(2-3 câu)*
-- **Code snippet (nếu custom):**
-```python
-# Dán mã nguồn (implementation) vào đây
-```
+**Thành viên 1 — Nguyễn Thành Vinh**
 
-**Thành viên 2 — [Tên]**
-- **Loại chiến lược:**
-- **Mô tả & lý do chọn:**
-- **Code snippet (nếu custom):**
+- **Loại chiến lược: FixedSizeChunker (fixed_size)**
+- **Mô tả & lý do chọn cho chủ đề này: Cắt đoạn văn bản theo kích thước cố định chunk_size=500, overlap=50. Đây là chiến lược đường cơ sở (baseline) có tốc độ tính toán nhanh nhất, phân bổ kích thước chunk đồng đều; tuy nhiên nhược điểm lớn là cắt đứt câu văn giữa chừng và làm mất liên kết tiêu đề mục trong các văn bản quy định.**
+**Thành viên 2 — Thanh Giang**
+
+- **Loại chiến lược: SentenceChunker (by_sentences)**
+- **Mô tả & lý do chọn: Cắt văn bản theo ranh giới câu bằng biểu thức chính quy ngắt câu (. , ! , ? ), gom cụm max_sentences_per_chunk=3. Chiến lược này đảm bảo mỗi câu là một đơn vị ngữ nghĩa nguyên vẹn, rất phù hợp cho tài liệu hỏi đáp (FAQ) và quy trình ngắn.**
 
 **Thành viên 3 — Đặng Thế Vinh**
 
@@ -119,8 +115,8 @@ chunks = chunker.chunk(body)  # body là nội dung Markdown đã bỏ frontmatt
 
 | Thành viên | Chiến lược (Strategy) | Điểm truy xuất (/10) | Điểm mạnh | Điểm yếu |
 |-----------|----------|----------------------|-----------|----------|
-| | | | | |
-| | | | | |
+| Nguyễn Thành Vinh | FixedSizeChunker | 1 / 10 (chấm 2 mức) / 4 / 10 (chấm doc_id) | Tốc độ cực nhanh, kích thước chunk đồng đều dễ kiểm soát bộ nhớ. | Cắt ngang câu, tài liệu dài sinh quá nhiều chunk lấn át các tài liệu quy trình ngắn. |
+| Nguyễn Thanh Giang | SentenceChunker | 6 / 10 | Giữ nguyên vẹn cấu trúc câu, trả lời tốt các câu hỏi về quy trình và bước thao tác. | Độ dài chunk không đều; các danh sách gạch đầu dòng ngắn bị phân tán thành quá nhiều chunk nhỏ. |
 | Đặng Thế Vinh | Heading/Section + RecursiveChunker; `chunk_size=1000` ký tự | Tạm tính 2/10 ở mức retrieval; chưa đánh giá agent | Giữ tiêu đề cha; truy xuất được một phần thông tin cần trả lời ở câu 1 và 3. | Câu 1 thiếu bước cuối; câu 3 thiếu phần danh sách; filter câu 5 không cải thiện kết quả. Câu 2, 4, 5 thiếu nguồn phù hợp. |
 
 **Chiến lược nào tốt nhất cho chủ đề này? Tại sao?**
