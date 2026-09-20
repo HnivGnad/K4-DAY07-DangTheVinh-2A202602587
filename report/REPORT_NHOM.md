@@ -32,7 +32,6 @@
 
 > Số ký tự tính trên phần thân đã bỏ frontmatter, khoảng trắng đầu/cuối; xuống dòng LF. Danh sách nguồn: `data/shopee/sources.csv`.
 >
-> Chưa đủ nguồn để chốt đáp án câu 2, 4, 5. Xem [ghi chú rà soát](SHOPEE_DATA_REVIEW.md).
 
 **Danh sách kiểm tra quản trị dữ liệu (Data governance checklist):**
 - [x] Tập tài liệu (Corpus) chỉ chứa nguồn công khai/được phép dùng và không chứa dữ liệu cá nhân, thông tin đăng nhập hoặc tài liệu nội bộ.
