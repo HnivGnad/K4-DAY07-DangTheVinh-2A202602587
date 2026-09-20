@@ -89,7 +89,8 @@ Số liệu lấy từ [BASELINE_RESULTS.md](BASELINE_RESULTS.md); các chunk đ
 
 - **Loại chiến lược: FixedSizeChunker (fixed_size)**
 - **Mô tả & lý do chọn cho chủ đề này: Cắt đoạn văn bản theo kích thước cố định chunk_size=500, overlap=50. Đây là chiến lược đường cơ sở (baseline) có tốc độ tính toán nhanh nhất, phân bổ kích thước chunk đồng đều; tuy nhiên nhược điểm lớn là cắt đứt câu văn giữa chừng và làm mất liên kết tiêu đề mục trong các văn bản quy định.**
-**Thành viên 2 — Thanh Giang**
+
+**Thành viên 2 — Nguyễn Thanh Giang**
 
 - **Loại chiến lược: SentenceChunker (by_sentences)**
 - **Mô tả & lý do chọn: Cắt văn bản theo ranh giới câu bằng biểu thức chính quy ngắt câu (. , ! , ? ), gom cụm max_sentences_per_chunk=3. Chiến lược này đảm bảo mỗi câu là một đơn vị ngữ nghĩa nguyên vẹn, rất phù hợp cho tài liệu hỏi đáp (FAQ) và quy trình ngắn.**
