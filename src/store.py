@@ -22,14 +22,8 @@ class EmbeddingStore:
         self._store: list[dict[str, Any]] = []
         self._next_index = 0
 
-        try:
-            import chromadb  # noqa: F401
-
-            # TODO: initialize chromadb client + collection
-            self._use_chroma = True
-        except Exception:
-            self._use_chroma = False
-            self._collection = None
+        self._use_chroma = False
+        self._collection = None
 
     def _make_record(self, doc: Document) -> dict[str, Any]:
             metadata = dict(doc.metadata)
