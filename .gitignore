@@ -1,40 +1,34 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-.pytest_cache/
-
-# Environment
-.env
-.env.local
-
-# OS
-.DS_Store
-
-# IDE
-.vscode/
-.idea/
-.omx/
-.venv/
-src_w_solution/
-
-# Instructor-only notes (chứa gợi ý/đáp án chấm bài, không public cho học viên)
-docs/INSTRUCTOR_GUIDE.md
-# Môi trường ảo
-.venv/
-.venv-test/
-.venv311/
+# Python environments
+.venv*/
 venv/
 env/
 
-# Python và kiểm thử
+# Python caches and test output
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
+.mypy_cache/
+.ruff_cache/
 
-# Biến môi trường, API key
+# Secrets (keep the configuration template)
 .env
 .env.*
 !.env.example
+
+# Local model caches
+.hf-cache/
+.sentence-transformers/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.omx/
+
+# Instructor-only material
+src_w_solution/
+docs/INSTRUCTOR_GUIDE.md
