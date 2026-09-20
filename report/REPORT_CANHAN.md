@@ -56,15 +56,15 @@ Giải thích cách tiếp cận của bạn khi lập trình (implement) các p
 ### Lớp EmbeddingStore
 
 **`add_documents` + `search`** — hướng tiếp cận:
-> *Viết 2-3 câu: lưu trữ thế nào? Tính độ tương tự ra sao?*
+> Mỗi document được chuyển thành vector embedding, sau đó lưu trong bộ nhớ cùng ID, nội dung và metadata. Khi tìm kiếm, câu hỏi được chuyển thành vector bằng cùng hàm embedding; tính tích vô hướng với từng vector đã lưu (tương đương cosine nếu các vector được chuẩn hóa về độ dài 1). Sắp xếp điểm giảm dần và trả về top_k kết quả.
 
 **`search_with_filter` + `delete_document`** — hướng tiếp cận:
-> *Viết 2-3 câu: lọc (filter) trước hay sau? Xóa bằng cách nào?*
+> Lọc các document theo metadata trước khi tính độ tương tự, rồi tìm top_k trong tập đã lọc để tránh kết quả sai đối tượng. Khi xóa, loại bỏ tất cả chunk có metadata["doc_id"] khớp với doc_id được yêu cầu. Trả về True nếu có chunk bị xóa, ngược lại trả về False.
 
 ### Tác tử KnowledgeBaseAgent
 
 **`answer`** — hướng tiếp cận:
-> *Viết 2-3 câu: cấu trúc prompt? Cách đưa ngữ cảnh (inject context) vào thế nào?*
+> Truy xuất top_k chunk liên quan đến câu hỏi rồi ghép nội dung thành phần ngữ cảnh. Prompt gồm chỉ dẫn trả lời dựa trên tài liệu, ngữ cảnh truy xuất và câu hỏi; yêu cầu thông báo thiếu thông tin nếu ngữ cảnh không đủ để trả lời. Cuối cùng, truyền prompt vào llm_fn và trả về câu trả lời nhận được.
 
 ---
 
