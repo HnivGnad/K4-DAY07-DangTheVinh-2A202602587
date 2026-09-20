@@ -121,7 +121,7 @@ chunks = chunker.chunk(body)  # body là nội dung Markdown đã bỏ frontmatt
 |-----------|----------|----------------------|-----------|----------|
 | | | | | |
 | | | | | |
-| Đặng Thế Vinh | Heading/Section + RecursiveChunker; `chunk_size=1000` ký tự | Chờ benchmark | Qua kiểm tra thủ công các chunk: giữ tiêu đề cha, các bước hướng dẫn không bị tách rời và vẫn giữ ngữ cảnh. | Chưa xác định lỗi truy xuất qua benchmark. Hạn chế thiết kế: phụ thuộc cấu trúc heading; tiêu đề lặp lại chiếm dung lượng chunk, mục quá dài vẫn có thể bị chia nhỏ. |
+| Đặng Thế Vinh | Heading/Section + RecursiveChunker; `chunk_size=1000` ký tự | Tạm tính 2/10 ở mức retrieval; chưa đánh giá agent | Giữ tiêu đề cha; truy xuất được một phần thông tin cần trả lời ở câu 1 và 3. | Câu 1 thiếu bước cuối; câu 3 thiếu phần danh sách; filter câu 5 không cải thiện kết quả. Câu 2, 4, 5 thiếu nguồn phù hợp. |
 
 **Chiến lược nào tốt nhất cho chủ đề này? Tại sao?**
 > *Viết 2-3 câu — đây là phần được đánh giá cao nhất (khả năng suy nghĩ & giải thích):*Với dữ liệu chính sách Shopee hiện tại, Heading/Section kết hợp Recursive là lựa chọn phù hợp vì tận dụng cấu trúc điều khoản và mục hỏi đáp. Qua kiểm tra thủ công, các chunk giữ được tiêu đề cha; một số quy trình dài vẫn trải trên nhiều chunk nên cần kiểm tra đủ ngữ cảnh khi truy xuất. Tuy nhiên, nhóm cần so sánh kết quả trên cùng 5 câu hỏi trước khi kết luận chiến lược nào truy xuất tốt nhất.
@@ -187,10 +187,12 @@ Nhóm sẽ lập bảng đối chiếu từng câu hỏi với đoạn nguồn v
 
 ## Tự Đánh Giá (Phần Nhóm)
 
-| Tiêu chí | Điểm tự đánh giá |
-|----------|-------------------|
-| Lựa chọn tài liệu (Document Set Quality) | / 10 |
-| Thiết kế chiến lược (Strategy Design) | / 15 |
-| Chất lượng truy xuất (Retrieval Quality) | / 10 |
-| Thuyết trình (Demo) | / 5 |
-| **Tổng phần nhóm** | **/ 40** |
+Đây là mức tự đánh giá tạm thời dựa trên minh chứng hiện có, không phải điểm giảng viên hoặc kết quả đã hoàn tất của cả nhóm. Điểm sẽ được cập nhật sau khi bổ sung nguồn, kết quả các thành viên, câu trả lời agent và demo.
+
+| Tiêu chí | Điểm tự đánh giá | Căn cứ và phần còn thiếu |
+|----------|-------------------|-------------------------|
+| Lựa chọn tài liệu (Document Set Quality) | 10 / 10 | Có 6 tài liệu cùng chủ đề, URL nguồn, metadata và sources.csv; đã chuẩn hóa heading. |
+| Thiết kế chiến lược (Strategy Design) | 15 / 15 | Có baseline ba chiến lược trên ba tài liệu, triển khai Heading + Recursive, giải thích lựa chọn và phân tích lỗi thực tế. |
+| Chất lượng truy xuất (Retrieval Quality) | 7 / 10 | Đây chỉ là ước lượng ở mức retrieval, chưa có câu trả lời agent và gold answer đầy đủ để chốt điểm theo rubric. |
+| Thuyết trình (Demo) | 0 / 5 | Đã chuẩn bị insights, bài học và hướng cải thiện; chưa có minh chứng về buổi demo và phần trình bày của từng thành viên. |
+| **Tổng phần nhóm** | **32 điểm; tối đa 40** | **32 trên 40 điểm của ba mục đã ước lượng ** |
