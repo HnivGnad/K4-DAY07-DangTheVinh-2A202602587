@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from email.mime import text
 import math
 import re
 
@@ -47,13 +46,12 @@ class SentenceChunker:
     def __init__(self, max_sentences_per_chunk: int = 3) -> None:
         self.max_sentences_per_chunk = max(1, max_sentences_per_chunk)
 
-        def chunk(self, text: str) -> list[str]:
-            sentences = [
+    def chunk(self, text: str) -> list[str]:
+        sentences = [
                 sentence.strip()
                 for sentence in re.split(r"(?<=[.!?])\s+", text)
                 if sentence.strip()
             ]
-
         size = self.max_sentences_per_chunk
         return [
             " ".join(sentences[i:i + size])
@@ -75,9 +73,9 @@ class RecursiveChunker:
         self.separators = self.DEFAULT_SEPARATORS if separators is None else list(separators)
         self.chunk_size = chunk_size
 
-        def chunk(self, text: str) -> list[str]:
-            if self.chunk_size <= 0:
-                raise ValueError("chunk_size phải lớn hơn 0")
+    def chunk(self, text: str) -> list[str]:
+        if self.chunk_size <= 0:
+            raise ValueError("chunk_size phải lớn hơn 0")
 
         return self._split(text, self.separators)
 
