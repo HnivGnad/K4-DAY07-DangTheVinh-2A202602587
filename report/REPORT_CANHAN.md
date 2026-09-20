@@ -129,14 +129,14 @@ tests/test_solution.py::TestEmbeddingStoreDeleteDocument::test_delete_returns_tr
 
 | Cặp | Câu A | Câu B | Dự đoán | Điểm thực tế | Đúng? |
 |------|-----------|-----------|---------|--------------|-------|
-| 1 | | | cao / thấp | | |
-| 2 | | | cao / thấp | | |
-| 3 | | | cao / thấp | | |
-| 4 | | | cao / thấp | | |
-| 5 | | | cao / thấp | | |
+| 1 | Tôi muốn trả lại sản phẩm. | Tôi muốn gửi trả món hàng đã mua. | Cao | 0.8969 | Có |
+| 2 | Sản phẩm được bảo hành trong 12 tháng. | Thời hạn bảo hành của sản phẩm là một năm. | Cao | 0.9008 | Có |
+| 3 | Người mua được hoàn tiền khi đơn hàng bị hủy. | Khi đơn hàng bị hủy, tiền sẽ được trả lại cho người mua. | Cao | 0.9473 | Có |
+| 4 | Tôi muốn yêu cầu hoàn tiền. | Hôm nay trời nắng đẹp. | Thấp | 0.5977 | Không |
+| 5 | Người bán cần xác nhận đơn hàng. | Tôi đang học cách nấu canh chua. | Thấp | 0.5636 | Không |
 
 **Kết quả nào bất ngờ nhất? Điều này nói gì về cách embeddings biểu diễn ý nghĩa?**
-> *Viết 2-3 câu:*
+> Cặp 4 khiến tôi bất ngờ nhất vì hai câu khác chủ đề nhưng có điểm 0.5977, vượt ngưỡng 0,5 đã chọn. Tuy nhiên, cả hai cặp khác chủ đề vẫn có điểm thấp hơn rõ rệt so với ba cặp diễn đạt cùng ý, cho thấy mô hình phân biệt được mức độ tương đồng trong các ví dụ này. Kết quả cũng cho thấy ngưỡng 0,5 chưa phù hợp để phân loại bộ câu này; điểm cosine không phải tỷ lệ phần trăm giống nhau về ý nghĩa.
 
 ---
 
