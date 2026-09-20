@@ -1,8 +1,8 @@
 # Báo Cáo Cá Nhân — Lab 7: Embedding & Vector Store
 
-**Họ tên:** [Tên sinh viên]
-**Nhóm:** [Tên nhóm]
-**Ngày:** [Ngày nộp]
+**Họ tên:** Đặng Thế Vinh
+**Nhóm:** VGV
+**Ngày:** 20/09
 
 > **Nộp 1 bản / sinh viên.** Phần nhóm (lựa chọn tài liệu, thiết kế chiến lược, bộ câu hỏi đánh giá, demo) nộp chung 1 bản trong `REPORT_NHOM.md`. Chi tiết thang điểm: `docs/SCORING.md`.
 
@@ -18,14 +18,14 @@
 > Độ tương tự cosine cao nghĩa là hai vector biểu diễn văn bản có hướng gần nhau, thường cho thấy hai văn bản tương đồng về nội dung hoặc ngữ nghĩa. Chỉ số càng gần 1 thì mức độ tương đồng càng cao.
 
 **Ví dụ có độ tương tự CAO:**
-- Câu A: Tôi muốn trả lại sản phẩm và nhận lại tiền.
-- Câu B: Tôi muốn hoàn tiền cho món hàng đã mua bằng cách gửi trả hàng.
-- Tại sao tương đồng: Cả hai câu đều diễn đạt mong muốn trả hàng để được hoàn tiền, dù cách dùng từ khác nhau.
+>- Câu A: Tôi muốn trả lại sản phẩm và nhận lại tiền.
+>- Câu B: Tôi muốn hoàn tiền cho món hàng đã mua bằng cách gửi trả hàng.
+>- Tại sao tương đồng: Cả hai câu đều diễn đạt mong muốn trả hàng để được hoàn tiền, dù cách dùng từ khác nhau.
 
 **Ví dụ có độ tương tự THẤP:**
-- Câu A: Tôi muốn trả lại sản phẩm và nhận lại tiền.
-- Câu B: Hôm nay trời nắng, rất thích hợp để đi dạo.
-- Tại sao khác: Câu A nói về đổi trả hàng và hoàn tiền, còn câu B nói về thời tiết và hoạt động ngoài trời.
+>- Câu A: Tôi muốn trả lại sản phẩm và nhận lại tiền.
+>- Câu B: Hôm nay trời nắng, rất thích hợp để đi dạo.
+>- Tại sao khác: Câu A nói về đổi trả hàng và hoàn tiền, còn câu B nói về thời tiết và hoạt động ngoài trời.
 
 **Tại sao độ tương tự cosine (cosine similarity) được ưu tiên hơn khoảng cách Euclid (Euclidean distance) cho text embeddings?**
 > Cosine similarity đo sự tương đồng về hướng của các vector, không bị ảnh hưởng bởi độ lớn nên thường phù hợp để so sánh ngữ nghĩa văn bản. Khoảng cách Euclid chịu ảnh hưởng của cả hướng lẫn độ lớn; khi các vector được chuẩn hóa về độ dài 1, hai cách đo cho thứ tự tương đồng tương đương.
@@ -48,10 +48,10 @@ Giải thích cách tiếp cận của bạn khi lập trình (implement) các p
 ### Các hàm chia nhỏ (Chunking Functions)
 
 **`SentenceChunker.chunk`** — hướng tiếp cận:
-> *Viết 2-3 câu: dùng biểu thức chính quy (regex) gì để phát hiện câu? Xử lý trường hợp ngoại lệ (edge case) nào?*
+> Tôi dùng regex r"(?<=[.!?])\s+" để tách câu tại khoảng trắng hoặc xuống dòng sau dấu ., !, ?, đồng thời giữ lại dấu câu. Sau đó, tôi loại bỏ khoảng trắng đầu/cuối và các phần rỗng, rồi ghép các câu thành từng chunk theo max_sentences_per_chunk. Với văn bản rỗng, kết quả dự kiến là danh sách rỗng; số câu mỗi chunk được giới hạn tối thiểu là 1.
 
 **`RecursiveChunker.chunk` / `_split`** — hướng tiếp cận:
-> *Viết 2-3 câu: thuật toán hoạt động thế nào? Base case (trường hợp cơ sở) là gì?*
+> Tôi chia văn bản theo thứ tự ưu tiên của các dấu phân cách: đoạn văn, dòng, câu rồi khoảng trắng; phần còn quá dài được xử lý đệ quy với dấu phân cách tiếp theo. Các phần nhỏ được ghép lại nếu tổng độ dài không vượt chunk_size, đồng thời giữ dấu phân cách để không mất nội dung. Trường hợp cơ sở là văn bản rỗng trả về [], văn bản đủ ngắn trả về một chunk; khi hết dấu phân cách hoặc gặp dấu phân cách rỗng, tôi cắt trực tiếp theo số ký tự.
 
 ### Lớp EmbeddingStore
 
