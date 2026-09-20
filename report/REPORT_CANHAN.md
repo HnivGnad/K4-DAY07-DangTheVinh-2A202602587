@@ -142,30 +142,59 @@ tests/test_solution.py::TestEmbeddingStoreDeleteDocument::test_delete_returns_tr
 
 ## 5. Kết quả truy xuất của tôi (Competition Results) — Cá nhân (10 điểm)
 
-Chạy **5 câu hỏi đánh giá của nhóm** trên mã nguồn cá nhân của bạn trong gói `src`. **5 câu hỏi này phải trùng với các thành viên cùng nhóm** (xem `REPORT_NHOM.md`).
+Tôi chạy cùng 5 câu hỏi đã thống nhất trong báo cáo nhóm trên mã nguồn cá nhân. Cấu hình: **Heading/Section kết hợp RecursiveChunker, 1.000 ký tự/chunk, Gemini `gemini-embedding-001`, 6 tài liệu, 96 chunk và top-k=3**. Dữ liệu được nạp theo `sources.csv`, bỏ frontmatter khỏi nội dung và giữ metadata trên từng chunk; vector được chuẩn hóa trước khi tính điểm.
+
+Minh chứng: [ket_qua_benchmark.txt](../ket_qua_benchmark.txt). Lệnh chạy:
+
+```powershell
+.\.venv-heading\Scripts\python.exe bench.py --provider gemini --strategy heading --output ket_qua_benchmark.txt
+```
+
+**Phạm vi kết quả:** Lần chạy này chỉ truy xuất, chưa gọi LLM sinh câu trả lời. Vì vậy cột Agent được ghi là chưa chạy, không sử dụng đáp án tự viết thay cho kết quả thực nghiệm.
 
 | # | Câu hỏi (Query) | Top-1 Chunk truy xuất được (tóm tắt) | Điểm Score | Có liên quan không? (Relevant) | Câu trả lời của Agent (tóm tắt) |
-|---|-------|--------------------------------|-------|-----------|------------------------|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
+|---|---|---|---:|---|---|
+| 1 | Người mua cần thực hiện những bước nào trên ứng dụng Shopee để gửi yêu cầu Trả hàng/Hoàn tiền? | `shopee_return_refund_guide_buyer#1`: quy định chung về đổi sản phẩm, đồng kiểm và gửi yêu cầu trên ứng dụng. | 0.8792 | Đúng chủ đề, nhưng top-1 không chứa các bước thao tác. | Chưa chạy LLM. |
+| 2 | Khi Shopee yêu cầu bổ sung bằng chứng cho yêu cầu Trả hàng/Hoàn tiền, Người mua có bao nhiêu thời gian để phản hồi? | `shopee_return_refund_guide_buyer#3`: thời hạn gửi yêu cầu và thời gian hệ thống phản hồi. | 0.8194 | Không trả lời đúng loại thời hạn được hỏi. | Chưa chạy LLM. |
+| 3 | Những nhóm sản phẩm nào thuộc danh mục hạn chế không được trả hàng hoặc không áp dụng lý do "Đổi ý/không còn nhu cầu"? | `shopee_faq_return_refund_seller#16`: hướng người đọc sang bài quy trình để xem danh sách hạn chế. | 0.8910 | Đúng chủ đề, nhưng không chứa danh sách sản phẩm. | Chưa chạy LLM. |
+| 4 | Shopee Xu và Mã giảm giá (Voucher) đã sử dụng sẽ được hoàn lại như thế nào khi yêu cầu Trả hàng/Hoàn tiền thành công? | `shopee_return_refund_guide_buyer#20`: khả năng gửi yêu cầu sau khi đã nhấn Đã nhận được hàng. | 0.7741 | Không chứa quy định hoàn Xu hoặc Voucher. | Chưa chạy LLM. |
+| 5 | Người bán vi phạm quy định đăng bán sản phẩm trên Shopee (như bán hàng cấm, hàng giả, gian lận) sẽ bị xử lý bằng những hình thức nào? | `shopee_faq_return_refund_seller#18`: chế tài đối với người mua trục lợi; kết quả khi lọc `audience=seller`. | 0.7750 | Sai đối tượng bị xử lý; không trả lời về vi phạm đăng bán của người bán. | Chưa chạy LLM. |
 
-**Bao nhiêu câu hỏi trả về chunk có liên quan trong top-3?** __ / 5
+### Kết quả top-3 và đối chiếu nội dung
+
+Tên ngắn: **buyer** = `shopee_return_refund_guide_buyer`; **process** = `shopee_seller_return_refund_process`; **faq** = `shopee_faq_return_refund_seller`; **payment** = `shopee_payment_policy_seller`. Số sau # là chỉ số chunk bắt đầu từ 0.
+
+| Câu | Top-1 (score) | Top-2 (score) | Top-3 (score) | Nhận xét |
+|---|---|---|---|---|
+| 1 | buyer#1 (0.8792) | buyer#8 (0.8765) | buyer#9 (0.8703) | Có bước 1–6 ở top-3, thiếu bước 7–8 trong buyer#10. |
+| 2 | buyer#3 (0.8194) | process#1 (0.8170) | buyer#2 (0.8083) | Không có thời hạn bổ sung bằng chứng. Con số 24 giờ trong buyer#2 là thời hạn yêu cầu với thực phẩm, không phải đáp án câu này. |
+| 3 | faq#16 (0.8910) | buyer#5 (0.8596) | buyer#6 (0.8489) | Có một phần danh sách ở top-3, thiếu phần tiếp theo trong buyer#7; cần đối chiếu phạm vi/phiên bản gold answer. |
+| 4 | buyer#20 (0.7741) | buyer#1 (0.7669) | buyer#0 (0.7569) | Không có nội dung trả lời về hoàn Xu/Voucher. |
+| 5 | faq#18 (0.7750) | faq#20 (0.7495) | payment#3 (0.7184) | Giống nhau khi có/không filter seller; không có chế tài đăng bán cần hỏi. |
+
+**Bao nhiêu câu hỏi trả về chunk có liên quan trong top-3?** **2 / 5**, nếu tính chunk thực sự chứa ít nhất một phần thông tin trả lời: câu 1 và câu 3. Cả hai vẫn thiếu thông tin để trả lời trọn vẹn; con số này không phải tỷ lệ câu trả lời Agent đúng. Câu 2, 4, 5 thiếu nguồn phù hợp trong corpus nên chưa thể quy lỗi hoàn toàn cho chiến lược chunking.
+
+### Thử nghiệm metadata filter
+
+Tôi chạy câu 5 hai lần: không lọc và lọc `audience=seller`. Cả hai cho cùng top-3, thứ hạng và điểm số nên filter chưa cải thiện kết quả trong lần thử này. Tài liệu dành cho người bán vẫn chứa đoạn nói về người mua trục lợi; vì vậy cần phân biệt đối tượng đọc tài liệu với đối tượng được đề cập, bổ sung nguồn đúng và cân nhắc metadata cấp chunk như `subject_role` hoặc `topic`.
+
+### Trường hợp lỗi và hướng cải thiện
+
+Ở câu 1, hai đoạn quy định/giới thiệu chiếm top-1 và top-2, trong khi đoạn hướng dẫn chỉ đứng top-3 và bị thiếu bước cuối vì mục 5.1 trải trên hai chunk. Tôi sẽ thử giữ nguyên mục hướng dẫn hoặc lấy thêm chunk liền kề, sau đó đo lại trên cùng bộ câu hỏi để kiểm chứng. Câu 3 cũng cho thấy tiêu đề giống câu hỏi có thể tạo điểm cao dù nội dung chỉ dẫn sang bài khác; cần kiểm tra thông tin thực sự có trong chunk thay vì chỉ nhìn cosine score.
 
 **Điều hay nhất tôi học được từ thành viên khác / nhóm khác (qua demo):**
-> *Viết 2-3 câu:*
+
+Điều tôi thấy đáng học hỏi khi đối chiếu các cách chia là phải kiểm tra chunk có chứa đủ đáp án, thay vì chỉ nhìn điểm tương đồng hoặc tên tài liệu. Overlap là một hướng đáng thử để giữ thông tin ở ranh giới chunk, còn chia theo heading giúp giữ cấu trúc mục; mỗi cách đều cần được kiểm chứng trên cùng câu hỏi. Tôi cũng nhận ra metadata phải phản ánh đúng nhu cầu lọc, vì tài liệu dành cho người bán vẫn có thể nói về hành vi của người mua.
+
 
 ---
-
 ## Tự Đánh Giá (Phần Cá Nhân)
 
-| Tiêu chí | Điểm tự đánh giá |
-|----------|-------------------|
-| Khởi động (Warm-up) | / 5 |
-| Hướng tiếp cận của tôi (My Approach) | / 10 |
-| Hoàn thiện code (Core Implementation — tests) | / 30 |
-| Dự đoán độ tương tự (Similarity Predictions) | / 5 |
-| Kết quả truy xuất của tôi (Competition Results) | / 10 |
-| **Tổng phần cá nhân** | **/ 60** |
+| Tiêu chí | Điểm tự đánh giá | Căn cứ |
+|----------|-------------------|--------|
+| Khởi động (Warm-up) | 5 / 5 | Giải thích cosine, có ví dụ tương đồng cao/thấp, so sánh với Euclid và tính đúng số chunk khi thay đổi overlap. |
+| Hướng tiếp cận của tôi (My Approach) | 8 / 10 | Đã giải thích Sentence, Recursive, store, filter, delete và agent; phần 5 mô tả Heading. Cần bổ sung giải thích riêng cho compute_similarity và ChunkingStrategyComparator để đầy đủ hơn. |
+| Hoàn thiện code (Core Implementation — tests) | 30 / 30 | Báo cáo đã lưu output 42/42 tests passed. Điểm này dựa trên kết quả kiểm thử đã ghi nhận, không thay thế đánh giá chất lượng retrieval. |
+| Dự đoán độ tương tự (Similarity Predictions) | 5 / 5 | Có 5 cặp câu, dự đoán, điểm thực tế và phân tích trường hợp bất ngờ; giải thích hạn chế của ngưỡng 0,5. Dự đoán không trùng kết quả vẫn có giá trị nếu phân tích đúng. |
+| Kết quả truy xuất của tôi (Competition Results) | 7 / 10 | Đã chạy đủ 5 câu hỏi chung bằng Gemini, lưu top-3 và điểm, thử filter A/B, phân tích lỗi và hướng cải thiện. Chưa sinh câu trả lời agent; câu 2, 4, 5 thiếu nguồn và câu 3 cần chốt phạm vi/phiên bản đáp án. |
+| **Tổng phần cá nhân** | **55 / 60 (tạm tính)** | **5 + 8 + 30 + 5 + 7 = 55.** |
